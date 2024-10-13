@@ -1,59 +1,82 @@
-\# E-Commerce API
+# Overview 
+This API provides user management functionalities, including user registration, login, and admin capabilities, with role-based access control.
 
-\### Overview This API provides user management functionalities,
-including user registration, login, and admin capabilities, with
-role-based access control.
+### Technologies Used 
+- Python 
+- Flask 
+- Flask-SQLAlchemy 
+- Flask-JWT-Extended
 
-\### Technologies Used - Python - Flask - Flask-SQLAlchemy -
-Flask-JWT-Extended
+### Installation
 
-\### Installation
-
-\*\*Clone the Repository\*\* \`\`\`bash git clone
-https://github.com/Ichrafsassi/Final_task.git
+**Clone the Repository** 
+```bash 
+git clone https://github.com/Ichrafsassi/Final_task.git 
+```
 
 Create a Virtual Environment
-
-python -m venv venv
+```bash
+python -m venv venv 
+```
 
 Activate the Virtual Environment
 
 On Windows:
-
-venv\\Scripts\\activate
+```bash
+venv\Scripts\activate 
+```
 
 On macOS/Linux:
-
-source venv/bin/activate
+```bash
+source venv/bin/activate 
+```
 
 Install Dependencies
-
-pip install -r requirements.txt
+```bash
+pip install -r requirements.txt 
+```
 
 Running the Application
-
-Set Environment Variables Make sure to set your environment variables
-for the JWT secret key and database URI if necessary.
-
+Set Environment Variables
+Make sure to set your environment variables for the JWT secret key and database URI if necessary.
 Run the Application
 
-flask run
+```bash
+flask run 
+```
 
-The API will be accessible at http://127.0.0.1:5000/. API Endpoints
+The API will be accessible at http://127.0.0.1:5000/.
+API Endpoints
 
-User Registration POST /register Registers a new user. Requires a JSON
-body with fields: username, first_name, last_name, email, phone_number,
-password.
+User Registration
 
-User Login POST /login Authenticates a user and returns a JWT token.
-Requires a JSON body with fields: email, password.
+    POST /register
+        Registers a new user.
+        Requires a JSON body with fields: username, first_name, last_name, email, phone_number, password.
 
-Admin Only Page GET /admin_only_page Accessible only by admin users.
+User Login
 
-Create Admin POST /create_admin Allows admin users to create a new admin
-account. Requires a JSON body with fields: username, first_name,
-last_name, email, phone_number, password.
+    POST /login
+        Authenticates a user and returns a JWT token.
+        Requires a JSON body with fields: email, password.
 
-All Users GET /all_users Retrieves a list of all users.
+Admin Only Page
 
-Visitor Page GET /visitor Accessible by anyone.
+    GET /admin_only_page
+        Accessible only by admin users.
+
+Create Admin
+
+    POST /create_admin
+        Allows admin users to create a new admin account.
+        Requires a JSON body with fields: username, first_name, last_name, email, phone_number, password.
+
+All Users
+
+    GET /all_users
+        Retrieves a list of all users.
+
+Visitor Page
+
+    GET /visitor
+        Accessible by anyone.
