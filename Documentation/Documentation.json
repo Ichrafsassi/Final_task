@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "7810ed4a-af20-4d2c-a41a-9888ee04d61a",
+		"name": "Documentation",
+		"description": "This API documentation provides detailed information about the **Endpoints** available.\n\nEach Endpoint is designed to perform specific actions, such as user registration, login, retrieving user information.\n\n_**Key Features:**_\n\n- **User Management**: Create and manage user accounts with secure authentication.\n    \n- **Access Control**: Retrieve information about all users and restrict access to certain endpoints based on user roles.\n    \n\n### How to Use This Documentation:\n\n1. **Endpoint Descriptions**: Each section describes a specific endpoint, including its purpose, request format, and expected responses.\n    \n2. **Example Requests**: Sample requests are provided to help you understand how to use the endpoints effectively.\n    \n3. **Error Handling**: Common error responses are outlined to help troubleshoot issues you may encounter.\n    \n\nTo get started, navigate through the available endpoints listed below. You can test these endpoints using Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"id": "517fc0ac-f69c-41a3-960e-34060eb4863c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"kinich\",\r\n    \"first_name\": \"kinich\",\r\n    \"last_name\": \"kinich\",\r\n    \"email\": \"kinish@gmail.com\",\r\n    \"phone_number\": \"12365498\",\r\n    \"password\": \"kinish3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/register",
+				"description": "The **register** endpoint allows new users to create an account by providing thier personal informations.\n\nThe endpoint registers users by storing thier information in the database, and password is hashed for security.\n\n#### Success Response\n\n- **Status**: `201 Created`\n    \n- **Body**:\n    \n\n``` json\n{\n    \"message\": \"User registered successfully!\"\n}\n\n ```\n\n#### **Error Responses**\n\n- **400 Bad Request**: If any required fields are missing or invalid.\n    \n\n``` json\n{\n    \"message\": \"Missing data!\"\n}\n\n ```\n\n- **400 Bad Request**: If the email or phone number already exists.\n    \n\n``` json\n{\n    \"message\": \"Email already exists!\"\n}\n\n ```\n\n- **400 Bad Request**: Username already exists.\n    \n\n``` json\n{\n    \"message\": \"Username already exists!\"\n}\n\n ```\n\n### Request JSON Body\n\n- **Method**: `POST`\n    \n- **URL**: `http://127.0.0.1:5000/register`\n    \n\n#### **Required Fields**:\n\n`//all string type`\n\n- `username`: A unique identifier for the user.\n    \n- `first_name`: User's first name.\n    \n- `last_name`: User's last name.\n    \n- `email`: A unique email address.\n    \n- `phone_number`: A unique phone number.\n    \n- `password`: A secure password\n    \n\nThe request body must be sent in JSON format. Use the following structure:"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"id": "3bba3108-5a52-413d-8068-ae1de4bdf03f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"securepassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/login",
+				"description": "The **login** endpoint allows existing users to log into thier account by providing thier email and password. The endpoint verifies the credentials and, upon successful login, returns an access token.\n\n### **Success Response**\n\n- **Status**: `200 OK`\n    \n\n``` json\n{\n    \"access_token\": \"your_jwt_token_here\",\n    \"message\": \"Login successful\"\n}\n\n ```\n\n#### **Error Responses**\n\n- **400 Bad Request**: If the email or password is missing.\n    \n\n``` json\n{\n    \"message\": \"Missing email or password!\"\n}\n\n ```\n\n- **401 Unauthorized**: If the email or password is incorrect.\n    \n\n``` json\n{\n    \"message\": \"Bad email or password\"\n}\n\n ```\n\n### **Request JSON Body**\n\n- **Method**: `POST`\n    \n- **URL**: `http://127.0.0.1:5000/login`\n    \n\n#### **Required Fields**:\n\n- **email**: The user's registered email address.\n    \n- **password**: The user's account password.\n    \n\nThe request body must be sent in JSON format. Use the following structure"
+			},
+			"response": []
+		},
+		{
+			"name": "admin_only_page",
+			"id": "d8f307f1-9cdf-4461-8535-54e1815507cf",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyODgzMDU4MCwianRpIjoiY2Y1NTRjODYtYTUwOS00ZjljLTkzMmUtNWQ1MjY1MjcxYThkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaXNfYWRtaW4iOnRydWV9LCJuYmYiOjE3Mjg4MzA1ODAsImNzcmYiOiIxOTNjNWVhMS1hNWU4LTQ1MjUtODhmZi0xZTRkZTNkMGNhMTMiLCJleHAiOjE3Mjg5MTY5ODB9.6ui0SyprVAQm6Ka-VMu6EYoiKq78JFRBdVrr1GDtH2s"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/admin_only_page",
+				"description": "The **admin_only_page** endpoint allows only admin users to access a special page. It returns a personalized greeting for the admin. Regular users cannot access this page.\n\n#### **Success Response**\n\n- **Status**: `200 OK`\n    \n\n``` json\n{\n    \"msg\": \"Hello admin admin!\"\n}\n\n ```\n\n#### **Error Responses**\n\n- **403 Forbidden**: If a non-admin user tries to access the page.\n    \n\n``` json\n{\n    \"message\": \"Admins only!\"\n}\n\n ```\n\n- **401 Unauthorized**: If no valid JWT token is provided.\n    \n\n``` json\n{\n    \"message\": \"Missing or invalid token\"\n}\n\n ```\n\n### **Request JSON Body**\n\n- **Method**: `GET`\n    \n- **URL**: `http://127.0.0.1:5000/admin_only_page`\n    \n\n#### **Required Headers**:\n\n- **Authorization**: Bearer token (JWT)\n    \n\n<img src=\"https://content.pstmn.io/bb8f6209-c3ff-4518-8f3d-df630a578d6c/aW1hZ2UucG5n\" alt=\"admin_only_page\" width=\"1385\" height=\"621\">"
+			},
+			"response": []
+		},
+		{
+			"name": "create_admin",
+			"id": "558d633f-b692-40c5-a487-6b5afeca67c8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyODgyMDkwMCwianRpIjoiMDA5Y2IyODMtNDA5ZC00MjU5LWE2YmYtZjliMDE2MWUzOTc4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaXNfYWRtaW4iOnRydWV9LCJuYmYiOjE3Mjg4MjA5MDAsImNzcmYiOiJiNzc5MDE3MC0wZTcxLTQwOTYtYTIzYi1iOTEwNjllNGQ3ZGYiLCJleHAiOjE3Mjg5MDczMDB9.cEJaoYMnk9f_n0mu-VJYUeIvilFa1VXFk9XzxiAxBoc"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"iudex\",\r\n    \"first_name\": \"iudex\",\r\n    \"last_name\": \"neuvillette\",\r\n    \"email\": \"neuvillet@gmail.com\",\r\n    \"phone_number\": \"21002508\",\r\n    \"password\": \"neuvillet\",\r\n    \"is_admin\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/create_admin",
+				"description": "The create_admin endpoint helps admin users create new admin accounts.\n\nOnly users with admin privileges can access this endpoint. If successful, it creates a new admin user and stores the information in the database.\n\n#### **Success Response**\n\n- **Status**: `201 Created`\n    \n\n``` json\n{\n    \"message\": \"Admin user created successfully!\"\n}\n\n ```\n\n#### **Error Responses**\n\n- **403 Forbidden**: If a non-admin user tries to access the page.\n    \n\n``` json\n{\n    \"message\": \"Admins only!\"\n}\n\n ```\n\n- **400 Bad Request**: If required fields are missing.\n    \n\n``` json\n{\n    \"message\": \"Missing data!\"\n}\n\n ```\n\n- **400 Bad Request**: If a user with the given email or username already exists.\n    \n\n``` json\n{\n    \"message\": \"User already exists!\"\n}\n\n ```\n\n### **Request JSON Body**\n\n- **Method**: `POST`\n    \n- **URL**: `http://127.0.0.1:5000/create_admin`\n    \n\n#### **Required Fields**:\n\n- **username**: A unique identifier for the admin user.\n    \n- **first_name**: Admin's first name.\n    \n- **last_name**: Admin's last name.\n    \n- **email**: A unique email address.\n    \n- **phone_number**: A unique phone number.\n    \n- **password**: A secure password.\n    \n\n`//all string type`\n\n#### **Required Headers**:\n\n- **Authorization**: Bearer token (JWT)\n    \n\n<img src=\"https://content.pstmn.io/1de94b2d-1cfc-4bc7-bb65-33fd1cbe35fe/aW1hZ2UucG5n\" alt=\"create_admin_Authorization\" width=\"1387\" height=\"666\">"
+			},
+			"response": []
+		},
+		{
+			"name": "all_users",
+			"id": "1b6bed0e-69b6-4966-86c9-3c5abe5ae6d4",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyODgzMDU4MCwianRpIjoiY2Y1NTRjODYtYTUwOS00ZjljLTkzMmUtNWQ1MjY1MjcxYThkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiaXNfYWRtaW4iOnRydWV9LCJuYmYiOjE3Mjg4MzA1ODAsImNzcmYiOiIxOTNjNWVhMS1hNWU4LTQ1MjUtODhmZi0xZTRkZTNkMGNhMTMiLCJleHAiOjE3Mjg5MTY5ODB9.6ui0SyprVAQm6Ka-VMu6EYoiKq78JFRBdVrr1GDtH2s"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:5000/all_users",
+				"description": "The **all_users** endpoint allows authenticated users to retrieve a list of all users in the system. The response greets each user by their username. Only authenticated users can access this endpoint.\n\n#### **Success Response**\n\n- **Status**: `200 OK`\n    \n\n``` json\n[\n    \"hello_admin\",\n    \"hello_nerdypotato\",\n    \"hello_arlecchino\",\n    \"hello_furina\",\n    \"hello_kinich\",\n    \"hello_iudex\"\n]\n\n ```\n\n#### **Error Responses**\n\n- **401 Unauthorized**: If no valid JWT token is provided.\n    \n\n``` json\n{\n    \"message\": \"Missing or invalid token\"\n}\n\n ```\n\n### **Request JSON Body**\n\n- **Method**: `GET`\n    \n- **URL**: `http://127.0.0.1:5000/all_users`\n    \n\n#### **Required Headers**:\n\n- **Authorization**: Bearer token (JWT)\n    \n\n<img src=\"https://content.pstmn.io/1543ecd4-de20-4d47-9573-2e51e3a4b3a3/aW1hZ2UucG5n\" alt=\"all_users\" width=\"1377\" height=\"753\">"
+			},
+			"response": []
+		},
+		{
+			"name": "visitor",
+			"id": "1e01fdf0-073a-4ba0-92e0-dc79b1b51a2f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:5000/visitor",
+				"description": "The **visitor** endpoint allows anyone, without requiring authentication, to access a visitor page. It returns a simple greeting message.\n\n**Success Response**\n\n- **Status**: `200 OK`\n    \n\n``` json\n{\n    \"message\": \"Hello Visitor!\"\n}\n\n ```\n\n### **Request JSON Body**\n\n- **Method**: `GET`\n    \n- **URL**: `http://127.0.0.1:5000/visitor`\n    \n\nNo request body or headers are required for this endpoint, it's going to bring data.\n\n<img src=\"https://content.pstmn.io/4886cab7-04ba-4e54-8298-b717d22bfaa1/aW1hZ2UucG5n\" alt=\"visitors\" width=\"1107\" height=\"146\">\n\n## **Conclusion**\n\nThis API offers a user management system with role-based access control and JWT authentication. The documented endpoints cover user registration, login, and admin functionality, as well as public access for visitors."
+			},
+			"response": []
+		}
+	]
+}
